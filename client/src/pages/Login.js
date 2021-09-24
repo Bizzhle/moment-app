@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 
 import { AuthContext } from "../context/auth";
@@ -17,7 +17,7 @@ const Login = (props) => {
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
       context.login(userData);
-      props.history.push("/");
+      props.history.push("/home");
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.errors);
@@ -30,42 +30,51 @@ const Login = (props) => {
   }
 
   return (
-    <div className="form-container">
-      <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
-        <h2>Login</h2>
-        <Form.Input
-          label="Username"
-          placeholder="username.."
-          name="username"
-          type="text"
-          value={values.username}
-          error={errors.username ? true : false}
-          onChange={onChange}
-        />
+    <div className="h-screen flex flex-col justify-center items-center ">
+      <div className="w-80 sm:w-96 m-auto ">
+        <Form
+          onSubmit={onSubmit}
+          noValidate
+          className={loading ? "loading" : "  "}
+        >
+          <h2>Login</h2>
+          <Form.Input
+            // label="Username"
+            placeholder="username.."
+            name="username"
+            type="text"
+            value={values.username}
+            error={errors.username ? true : false}
+            onChange={onChange}
+          />
 
-        <Form.Input
-          label="Password"
-          placeholder="password.."
-          name="password"
-          type="password"
-          value={values.password}
-          error={errors.password ? true : false}
-          onChange={onChange}
-        />
+          <Form.Input
+            // label="Password"
+            placeholder="password.."
+            name="password"
+            type="password"
+            value={values.password}
+            error={errors.password ? true : false}
+            onChange={onChange}
+          />
 
-        <Button type="submit" primary>
-          Login
-        </Button>
-      </Form>
-      {Object.keys(errors).length > 0 && (
-        <div className="ui error message">
-          <ul className="list">
-            {Object.values(errors).map((value) => (
-              <li key={value}>{value}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+          <button
+            type="submit"
+            className="w-full rounded-md text-white bg-blue-500 p-4"
+          >
+            Login
+          </button>
+        </Form>
+        {Object.keys(errors).length > 0 && (
+          <div className="ui error message w-80 md:w-96">
+            <ul className="list">
+              {Object.values(errors).map((value) => (
+                <li key={value}>{value}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

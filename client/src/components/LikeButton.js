@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
-import { Button, Label, Icon } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 
 // import MyPopup from '../util/MyPopup';
 
@@ -21,35 +21,31 @@ function LikeButton({ user, post: { id, likeCount, likes } }) {
 
   const likeButton = user ? (
     liked ? (
-      <Button color="red">
+      <button className="text-red-500 mr-2">
         <Icon name="heart" />
-      </Button>
+      </button>
     ) : (
-      <Button color="teal" basic>
-        <Icon name="heart" />
-      </Button>
+      <button className="text-blue-500 mr-2">
+        <Icon name="heart outline" />
+      </button>
     )
   ) : (
-    <Button as={Link} to="/login" color="teal" basic>
-      <Icon name="heart" />
-    </Button>
+    <button className="text-blue-500 mr-2" as={Link} to="/login">
+      <Icon name="heart outline" />
+    </button>
   );
 
   return user ? (
     <Button as="div" labelPosition="right" onClick={likePost}>
       {likeButton}
       {/* <MyPopup content={liked ? 'Unlike' : 'Like'}>{likeButton}</MyPopup> */}
-      <Label basic color="teal" pointing="left">
-        {likeCount}
-      </Label>
+      <div>{likeCount}</div>
     </Button>
   ) : (
     <Button as="div" labelPosition="right">
       {likeButton}
       {/* <MyPopup content={liked ? 'Unlike' : 'Like'}>{likeButton}</MyPopup> */}
-      <Label basic color="teal" pointing="left">
-        {likeCount}
-      </Label>
+      <div>{likeCount}</div>
     </Button>
   );
 }

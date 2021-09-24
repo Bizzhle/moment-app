@@ -10,6 +10,10 @@ const PostForm = () => {
     body: "",
   });
 
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
@@ -35,18 +39,17 @@ const PostForm = () => {
   }
 
   return (
-    <>
+    <div className=" pt-20">
       <Form onSubmit={onSubmit}>
-        <h2>Create Post</h2>
         <Form.Field>
           <Form.Input
             placeholder="Hi Family"
             name="body"
             onChange={onChange}
-            value={values.body}
+            value={capitalize(values.body)}
             error={error ? true : false}
           />
-          <Button type="submit" color="teal">
+          <Button type="submit" color="teal" disabled={values.body === ""}>
             Submit
           </Button>
         </Form.Field>
@@ -58,7 +61,7 @@ const PostForm = () => {
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
