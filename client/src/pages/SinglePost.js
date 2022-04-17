@@ -38,7 +38,7 @@ const SinglePost = (props) => {
 
   let postMarkup;
   if (!getPost) {
-    postMarkup = <p>loading...</p>;
+    postMarkup = <p className="flex justify-center items-center">loading...</p>;
   } else {
     const {
       id,

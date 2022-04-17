@@ -49,7 +49,7 @@ const PostForm = () => {
             value={capitalize(values.body)}
             error={error ? true : false}
           />
-          <Button type="submit" color="teal" disabled={values.body === ""}>
+          <Button type="submit" color="blue" disabled={values.body === ""}>
             Submit
           </Button>
         </Form.Field>
